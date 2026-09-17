@@ -1,0 +1,50 @@
+<!-- Bloqueamos el renderizado de la UI en procesos de fondo -->
+@if (!isIframe) {
+  <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+    <h1>Bienvenido a {{ title() }}</h1>
+
+    @if (!isLoggedIn) {
+      <div>
+        <p>Por favor, inicia sesión para acceder al sistema.</p>
+        <button (click)="login()" style="padding: 10px 20px; cursor: pointer; background-color: #0078D4; color: white; border: none; border-radius: 4px;">
+          Iniciar sesión con Microsoft
+        </button>
+      </div>
+    } @else {
+      <div>
+        <p>Sesión activa como: <strong>{{ userName }}</strong></p>
+        
+        @if (userRoles.length > 0) {
+          <p>Tus roles: {{ userRoles.join(', ') }}</p>
+        }
+        
+        <button (click)="logout()" style="padding: 10px 20px; cursor: pointer; background-color: #d13438; color: white; border: none; border-radius: 4px;">
+          Cerrar sesión
+        </button>
+        
+        <!-- Nuevo botón para pedir datos a Spring Boot -->
+        <button (click)="obtenerPedidos()" style="padding: 10px 20px; cursor: pointer; background-color: #107c10; color: white; border: none; border-radius: 4px; margin-left: 10px;">
+          Cargar Pedidos Dummy
+        </button>
+      </div>
+
+      <!-- Mostramos la lista iterando el JSON recibido -->
+      @if (pedidos.length > 0) {
+        <div style="margin-top: 30px; text-align: left; display: inline-block; background: #f3f2f1; padding: 20px; border-radius: 8px;">
+          <h3 style="margin-top: 0;">Lista de Pedidos (Desde Spring Boot)</h3>
+          <ul style="list-style-type: none; padding: 0;">
+            @for (pedido of pedidos; track pedido.id) {
+              <li style="padding: 8px 0; border-bottom: 1px solid #ddd;">
+                <strong>ID:</strong> {{ pedido.id }} | 
+                <strong>Producto:</strong> {{ pedido.producto }} | 
+                <strong>Estado:</strong> {{ pedido.estado }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    }
+  </div>
+
+  <router-outlet></router-outlet>
+}
