@@ -1,59 +1,30 @@
-# Pedidos360Frontend
+# 🚀 Pedidos360 - Sistema Integrado (Frontend Angular & Backend BFF Spring Boot)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+Sistema de gestión y consulta de pedidos desarrollado para la evaluación de integración de servicios y seguridad, conectando un frontend en **Angular 18** con un Backend for Frontend (BFF) en **Spring Boot 3.3.4**, autenticado mediante **Microsoft Entra External ID (Azure CIAM)** con OAuth2/JWT.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🛠️ Tecnologías Utilizadas
 
+*   **Frontend:** Angular (Standalone Components, Signals), MSAL Angular (`@azure/msal-angular`).
+*   **Backend (BFF):** Java 21, Spring Boot 3.3.4, Spring Security 6, OAuth2 Resource Server (Nimbus).
+*   **Seguridad / Auth:** Azure CIAM (Microsoft Entra External ID) mediante protocolo OAuth2 / OIDC con validación por JWK Set URI.
+
+---
+
+## 📂 Estructura del Repositorio
+
+El repositorio contiene ambos componentes del sistema:
+*   `pedidos360-bff/` -> Servidor Backend en Spring Boot.
+*   `src/` (en la raíz o carpeta frontend) -> Aplicación cliente en Angular.
+
+---
+
+## ⚙️ Instrucciones de Configuración y Ejecución
+
+Sigue estos pasos en orden para levantar el sistema completo en tu entorno local.
+
+### 1. Clonar el repositorio
 ```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+git clone [https://github.com/Hakuoki73/pedidos360-evaluacion.git](https://github.com/Hakuoki73/pedidos360-evaluacion.git)
+cd pedidos360-evaluacion
