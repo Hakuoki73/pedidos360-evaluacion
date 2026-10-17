@@ -34,15 +34,15 @@ export function MSALInstanceFactory(): PublicClientApplication {
 export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   return {
     interactionType: InteractionType.Redirect,
-    // Pedimos el token institucional para nuestra propia app
     authRequest: { scopes: ['d1a052a1-66c7-4847-b5e2-46fdb86c94f6/.default'] }
   };
 }
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  // El interceptor adjuntará automáticamente el token correcto a las peticiones del backend
-  protectedResourceMap.set('http://localhost:8080/api/', ['d1a052a1-66c7-4847-b5e2-46fdb86c94f6/.default']);
+  // APUNTAMOS AL API GATEWAY DE AWS PARA QUE MSAL INYECTE EL TOKEN AUTOMÁTICAMENTE
+  protectedResourceMap.set('https://ucckg8l1r3.execute-api.us-east-1.amazonaws.com', ['d1a052a1-66c7-4847-b5e2-46fdb86c94f6/.default']);
+  
   return {
     interactionType: InteractionType.Redirect,
     protectedResourceMap

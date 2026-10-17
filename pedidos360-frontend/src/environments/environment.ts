@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  apiUrl: 'https://ucckg8l1r3.execute-api.us-east-1.amazonaws.com', // <-- Tu API Gateway de AWS recién creado
   msalConfig: {
     auth: {
       clientId: 'd1a052a1-66c7-4847-b5e2-46fdb86c94f6', 

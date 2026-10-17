@@ -2,10 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
+  imports: [RouterOutlet],
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
@@ -64,27 +65,27 @@ export class App implements OnInit {
       return;
     }
 
-    // Solicitamos el Access Token fresco de manera explícita y silenciosa
     this.msalService.acquireTokenSilent({
       scopes: ['d1a052a1-66c7-4847-b5e2-46fdb86c94f6/.default'],
       account: cuentaActiva
     }).subscribe({
       next: (response) => {
-        // Creamos la cabecera HTTP con el Bearer Token real
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${response.accessToken}`,
           'Content-Type': 'application/json'
         });
 
-        // Consumimos el backend protegido enviando el token en la mano
-        this.http.get<any[]>('http://localhost:8080/api/pedidos', { headers }).subscribe({
+        // Apunta directamente al API Gateway de AWS
+        const urlAws = `${environment.apiUrl}/api/pedidos`;
+
+        this.http.get<any[]>(urlAws, { headers }).subscribe({
           next: (data) => {
             this.pedidos = data;
-            console.log('Pedidos recibidos desde Spring Boot:', data);
+            console.log('Pedidos recibidos desde AWS API Gateway:', data);
           },
           error: (error) => {
-            console.error('Error al llamar al backend:', error);
-            alert('El backend rechazó la petición (401). Revisa la terminal de Spring Boot para ver el detalle exacto.');
+            console.error('Error al llamar al API Gateway de AWS:', error);
+            alert('El servidor rechazó la petición. Revisa la consola o los logs de EC2.');
           }
         });
       },
