@@ -40,8 +40,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  // APUNTAMOS AL API GATEWAY DE AWS PARA QUE MSAL INYECTE EL TOKEN AUTOMÁTICAMENTE
-  protectedResourceMap.set('https://ucckg8l1r3.execute-api.us-east-1.amazonaws.com', ['d1a052a1-66c7-4847-b5e2-46fdb86c94f6/.default']);
+  // Se agregó /api/ al final para la intercepción del token
+  protectedResourceMap.set('https://ucckg8l1r3.execute-api.us-east-1.amazonaws.com/api/', ['d1a052a1-66c7-4847-b5e2-46fdb86c94f6/.default']);
   
   return {
     interactionType: InteractionType.Redirect,
